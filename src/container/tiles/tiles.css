@@ -1,0 +1,49 @@
+.imgAlign{
+    width: 500px !important;
+    height: 500px !important;
+}
+.tiles{
+    padding: 1.5% 1.5%;
+    float: left;
+}
+.likeIconSpan{
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: 700;
+    color: #625e5e;
+    padding: 5px 5px;
+}
+.instaIcon{
+    font-size: 22px;
+}
+.titlesContainer{
+    float: left;
+    margin: 2% 9%;
+    padding-top: 5%;
+}
+.likeIcon{  
+    font-size: 23px;
+    float: left;
+    margin-top: -2px;
+}
+.shareIconSpan{
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: 700;
+    color: #625e5e;
+    padding: 5px 5px;
+    float: right;
+}
+.shareIcon{
+    font-size: 23px;
+    float: left;
+    margin-top: -3px;
+    margin-right: 7px;
+}
+
+@media(max-width:500px){
+    .titlesContainer{
+        margin: 2% 3%;
+        padding-top: 25%;
+    }
+}

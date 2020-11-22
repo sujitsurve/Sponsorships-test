@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
-
+import './App.css'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink 
+} from "react-router-dom";
+import Tiles from './container/tiles/tiles';
+import Sponsorships from './container/sponsorships/sponsorships'
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Router>
+      <div>
+        <nav>
+          <ul className="topnav sticky">
+            <li>
+              <NavLink exact={true}  to="/">Tiles</NavLink >
+            </li>
+            <li>
+              <NavLink  to="/sponsorship">Sponsorship</NavLink >
+            </li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path="/sponsorship">
+            <Sponsorships />
+          </Route>
+          <Route path="/">
+            <Tiles />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
