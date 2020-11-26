@@ -4,8 +4,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Tiles from './container/Tiles/tiles';
-import Sponsorships from './container/Sponsorships/sponsorships';
+import Tiles from './container/tiles/tiles';
+import Sponsorships from './container/sponsorships/sponsorships';
 function App() {
   return (
     <Layout>

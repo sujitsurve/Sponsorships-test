@@ -3,7 +3,7 @@ import ReactHlsPlayer from 'react-hls-player';
 import { connect } from 'react-redux';
 
 import Spinner from '../../component/Spinner/Spinner';
-import Charity from '../Charity/charity';
+import Charity from '../charity/charity';
 import './sponsorship.css'
 import * as actions from'../../store/actions';
 
