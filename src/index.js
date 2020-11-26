@@ -3,10 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
 
+import sponsorshipReducer from './store/reducer/sponsorship';
+import tilesReducer from './store/reducer/tiles';
+
+const rootReducers = combineReducers({
+  sponsorship: sponsorshipReducer,
+  tiles: tilesReducer
+});
+
+const store = createStore(rootReducers, applyMiddleware(thunk));
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store} >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

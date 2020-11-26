@@ -1,36 +1,19 @@
 import React,{ Component } from 'react';
-import { FcLike,FcShare  } from 'react-icons/fc';
-import {FaInstagram} from 'react-icons/fa';
+import { FcLike, FcShare  } from 'react-icons/fc';
+import { FaInstagram } from 'react-icons/fa';
+import { connect } from 'react-redux';
 
-import axios from 'axios';
-import Spinner from '../Spinner/Spinner';
+import * as actions from '../../store/actions';
+import Spinner from '../../component/Spinner/Spinner';
 import './tiles.css';
 class Tiles extends Component{
-    constructor(){
-        super()
-        this.state = {
-            tilesData : [],
-            spinner: true
-        }
-    }
     componentDidMount(){
-            axios.get('https://api-test.test.aws.the8app.com/campaigns/sampledata/tiles')
-            .then(res => {
-                this.setState({
-                    tilesData :  res.data,
-                    spinner:false
-                })
-            }).catch(err =>{
-                this.setState({
-                    spinner: false
-                })
-                alert(err.message)
-            })
+            this.props.onFetchTitle();
     }
     render(){
-         let response = null;
-        if(this.state.tilesData != null){
-            response = this.state.tilesData.map(item => {
+        let response = null;
+        if(this.props.tilesData != null){
+            response = this.props.tilesData.map(item => {
                 if(item.categoryType === "community"){
                     let styleObj = {
                         width : item.mediaWidth,
@@ -56,11 +39,22 @@ class Tiles extends Component{
     
         return (<>
             {
-                this.state.spinner ? <Spinner/> :
+                this.props.spinner ? <Spinner/> :
                 <div className="titlesContainer content" >{response}</div> 
             }
         </>)
     }
 }
+const mapStateToProps = state =>{
+    return{
+        tilesData: state.tiles.tilesData,
+        spinner : state.tiles.spinner
+    }
+}; 
+const mapDispatchToProps = dispatch =>{
+    return{
+        onFetchTitle : () => dispatch(actions.getTilesData())
+    }
+};
 
-export default Tiles;
+export default connect(mapStateToProps,mapDispatchToProps)(Tiles);

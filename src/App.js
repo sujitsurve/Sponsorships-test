@@ -1,38 +1,23 @@
-import './App.css'
+import Layout from './hoc/Layout/Layout';
+import './App.css';
 import {
-  BrowserRouter as Router,
   Switch,
-  Route,
-  NavLink 
+  Route
 } from "react-router-dom";
-import Tiles from './container/tiles/tiles';
-import Sponsorships from './container/sponsorships/sponsorships'
+import Tiles from './container/Tiles/tiles';
+import Sponsorships from './container/Sponsorships/sponsorships';
 function App() {
   return (
-
-    <Router>
-      <div>
-        <nav>
-          <ul className="topnav sticky">
-            <li>
-              <NavLink exact={true}  to="/">Tiles</NavLink >
-            </li>
-            <li>
-              <NavLink  to="/sponsorship">Sponsorship</NavLink >
-            </li>
-          </ul>
-        </nav>
-
-        <Switch>
-          <Route path="/sponsorship">
-            <Sponsorships />
-          </Route>
-          <Route path="/">
-            <Tiles />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <Layout>
+      <Switch>
+        <Route path="/sponsorship">
+          <Sponsorships />
+        </Route>
+        <Route path="/">
+          <Tiles />
+        </Route>
+      </Switch>
+    </Layout>
   );
 }
 

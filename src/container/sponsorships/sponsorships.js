@@ -1,42 +1,19 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
-import Spinner from '../Spinner/Spinner';
-import Charity from '../charity/charity'
-import './sponsorship.css'
 import ReactHlsPlayer from 'react-hls-player';
+import { connect } from 'react-redux';
+
+import Spinner from '../../component/Spinner/Spinner';
+import Charity from '../Charity/charity';
+import './sponsorship.css'
+import * as actions from'../../store/actions';
+
 class Sponsorships extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sponsorshipsData: [],
-            spinner: true
-        }
-    }
     componentDidMount() {
-        axios.get('https://api-test.test.aws.the8app.com/campaigns/sampledata/sponsorships')
-            .then(res => {
-                this.setState({
-                    sponsorshipsData: res.data,
-                    spinner: false
-                })
-            }).catch(err =>{
-                this.setState({
-                    spinner: false
-                })
-                alert(err.message)
-            })
+        this.props.onFetchSponsorships();
     }
     render() {
-        let sponsorships = this.state.sponsorshipsData.map(spdata => {
-            //    return <img className="" src={spdata.videoUriHls} alt="new" /> 
-            // return ( <video width="400" controls>
-            //         <source src={spdata.videoUriDash} type="video/mp4" />
-            //         <source src={spdata.videoUriHls} type="video/ogg" />
-            //     </video>)
-            // return (<iframe title={spdata.campaignId} width="420" height="315"
-            //         src="https://www.youtube.com/embed/tgbNymZ7vqY">
-            // </iframe>)
+        let sponsorships = this.props.sponsorshipsData.map(spdata => {
+           
             const charityDonationIncentive =    spdata.hasOwnProperty('charityDonationIncentive') ?
                                                     <Charity data={spdata.charityDonationIncentive}/>
                                                 : null
@@ -70,12 +47,23 @@ class Sponsorships extends Component {
         return (
             <>
                 {
-                    this.state.spinner ? <Spinner /> : 
+                    this.props.spinner ? <Spinner /> : 
                     <div className="sponsorships">{sponsorships}</div>
                 }
             </>
         )
     }
 }
+const mapStateToProps = state =>{
+     return{
+        sponsorshipsData: state.sponsorship.sponsorshipsData,
+        spinner : state.sponsorship.spinner
+    }
+}; 
+const mapDispatchToProps = dispatch =>{
+    return{
+        onFetchSponsorships : () => dispatch(actions.getSponsorships())
+    }
+};
 
-export default Sponsorships;
+export default connect(mapStateToProps,mapDispatchToProps)(Sponsorships);
