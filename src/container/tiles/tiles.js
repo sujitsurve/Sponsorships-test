@@ -22,7 +22,7 @@ class Tiles extends Component{
                     }
                     return (
                         <div key={item.id} className="tiles">
-                            <div className="float-left"><FaInstagram className="instaIcon" /> <span className="float-right pl-8"><a Style="color: #828282;" href={item.url}>{item.name}</a></span></div>
+                            <div className="float-left"><FaInstagram className="instaIcon" /> <span className="float-right pl-8"><a style={{color: "#828282"}} href={item.url}>{item.name}</a></span></div>
                             <div>
                                 <img className="" src={item.mediaImageUri} alt="new" style={styleObj}/> 
                             </div>
@@ -45,12 +45,14 @@ class Tiles extends Component{
         </>)
     }
 }
+
 const mapStateToProps = state =>{
     return{
         tilesData: state.tiles.tilesData,
         spinner : state.tiles.spinner
     }
 }; 
+
 const mapDispatchToProps = dispatch =>{
     return{
         onFetchTitle : () => dispatch(actions.getTilesData())

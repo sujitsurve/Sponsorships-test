@@ -18,10 +18,10 @@ class Sponsorships extends Component {
                                                     <Charity data={spdata.charityDonationIncentive}/>
                                                 : null
             return(
-                <div class="sponsorshipContainter">
+                <div key={spdata.sponsorshipId} className="sponsorshipContainter">
                     <div className="BrandDetails">
                             <div className="brandName">
-                                <img Style="max-height: 100px; max-width: 100px;" src={spdata.brandLogoUri} alt="new" /> 
+                                <img style={{maxHeight : "100px", maxWidth: "100px"}} src={spdata.brandLogoUri} alt="new" /> 
                                 <h2>{spdata.brandName}</h2> 
                             </div>
                             <div className="brandInfo">
